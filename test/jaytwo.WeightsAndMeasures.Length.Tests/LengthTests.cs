@@ -9,108 +9,173 @@ namespace jaytwo.WeightsAndMeasures.Tests
 
     public class LengthTests
     {
-        [Fact]
-        public void Inches()
+        [Theory]
+        [InlineData(25.4, LengthUnit.Millimeters, 1)]
+        [InlineData(2.54, LengthUnit.Centimeters, 1)]
+        [InlineData(.0254, LengthUnit.Meters, 1)]
+        [InlineData(.0000254, LengthUnit.Kilometers, 1)]
+        [InlineData(1, LengthUnit.Inches, 1)]
+        [InlineData(1, LengthUnit.Feet, 12)]
+        [InlineData(1, LengthUnit.Yards, 36)]
+        [InlineData(1, LengthUnit.Miles, 63360)]
+        public void Inches(double value, LengthUnit units, double expected)
         {
             // arrange
-            var length = Length.FromMeters(1);
+            var length = new Length(Convert.ToDecimal(value), units);
 
             // act
             var result = length.Inches;
 
             // assert
-            Assert.Equal(39.37008m, result, 5);
+            Assert.Equal(Convert.ToDecimal(expected), result);
         }
 
-        [Fact]
-        public void Feet()
+        [Theory]
+        [InlineData(304.8, LengthUnit.Millimeters, 1)]
+        [InlineData(30.48, LengthUnit.Centimeters, 1)]
+        [InlineData(0.3048, LengthUnit.Meters, 1)]
+        [InlineData(0.0003048, LengthUnit.Kilometers, 1)]
+        [InlineData(12, LengthUnit.Inches, 1)]
+        [InlineData(1, LengthUnit.Feet, 1)]
+        [InlineData(1, LengthUnit.Yards, 3)]
+        [InlineData(1, LengthUnit.Miles, 5280)]
+        public void Feet(double value, LengthUnit units, double expected)
         {
             // arrange
-            var length = Length.FromMeters(1);
+            var length = new Length(Convert.ToDecimal(value), units);
 
             // act
             var result = length.Feet;
 
             // assert
-            Assert.Equal(3.280840m, result, 6);
+            Assert.Equal(Convert.ToDecimal(expected), result);
         }
 
-        [Fact]
-        public void Yards()
+        [Theory]
+        [InlineData(914.4, LengthUnit.Millimeters, 1)]
+        [InlineData(91.44, LengthUnit.Centimeters, 1)]
+        [InlineData(0.9144, LengthUnit.Meters, 1)]
+        [InlineData(0.0009144, LengthUnit.Kilometers, 1)]
+        [InlineData(36, LengthUnit.Inches, 1)]
+        [InlineData(3, LengthUnit.Feet, 1)]
+        [InlineData(1, LengthUnit.Yards, 1)]
+        [InlineData(1, LengthUnit.Miles, 1760)]
+        public void Yards(double value, LengthUnit units, double expected)
         {
             // arrange
-            var length = Length.FromMeters(1);
+            var length = new Length(Convert.ToDecimal(value), units);
 
             // act
             var result = length.Yards;
 
             // assert
-            Assert.Equal(1.093613m, result, 6);
+            Assert.Equal(Convert.ToDecimal(expected), result);
         }
 
-        [Fact]
-        public void Miles()
+        [Theory]
+        [InlineData(1609344, LengthUnit.Millimeters, 1)]
+        [InlineData(160934.4, LengthUnit.Centimeters, 1)]
+        [InlineData(1609.344, LengthUnit.Meters, 1)]
+        [InlineData(1.609344, LengthUnit.Kilometers, 1)]
+        [InlineData(63360, LengthUnit.Inches, 1)]
+        [InlineData(5280, LengthUnit.Feet, 1)]
+        [InlineData(1760, LengthUnit.Yards, 1)]
+        [InlineData(1, LengthUnit.Miles, 1)]
+        public void Miles(double value, LengthUnit units, double expected)
         {
             // arrange
-            var length = Length.FromMeters(1);
+            var length = new Length(Convert.ToDecimal(value), units);
 
             // act
             var result = length.Miles;
 
             // assert
-            Assert.Equal(0.0006213712m, result, 8);
+            Assert.Equal(Convert.ToDecimal(expected), result);
         }
-
-        [Fact]
-        public void Millimeters()
+        [Theory]
+        [InlineData(1, LengthUnit.Millimeters, 1)]
+        [InlineData(0.1, LengthUnit.Centimeters, 1)]
+        [InlineData(.001, LengthUnit.Meters, 1)]
+        [InlineData(.000001, LengthUnit.Kilometers, 1)]
+        [InlineData(1, LengthUnit.Inches, 25.4)]
+        [InlineData(1, LengthUnit.Feet, 304.8)]
+        [InlineData(1, LengthUnit.Yards, 914.4)]
+        [InlineData(1, LengthUnit.Miles, 1609344)]
+        public void Millimeters(double value, LengthUnit units, double expected)
         {
             // arrange
-            var length = Length.FromMeters(1);
+            var length = new Length(Convert.ToDecimal(value), units);
 
             // act
             var result = length.Millimeters;
 
             // assert
-            Assert.Equal(1000, result);
+            Assert.Equal(Convert.ToDecimal(expected), result);
         }
 
-        [Fact]
-        public void Centimeters()
+        [Theory]
+        [InlineData(10, LengthUnit.Millimeters, 1)]
+        [InlineData(1, LengthUnit.Centimeters, 1)]
+        [InlineData(.01, LengthUnit.Meters, 1)]
+        [InlineData(.00001, LengthUnit.Kilometers, 1)]
+        [InlineData(1, LengthUnit.Inches, 2.54)]
+        [InlineData(1, LengthUnit.Feet, 30.48)]
+        [InlineData(1, LengthUnit.Yards, 91.44)]
+        [InlineData(1, LengthUnit.Miles, 160934.4)]
+        public void Centimeters(double value, LengthUnit units, double expected)
         {
             // arrange
-            var length = Length.FromMeters(1);
+            var length = new Length(Convert.ToDecimal(value), units);
 
             // act
             var result = length.Centimeters;
 
             // assert
-            Assert.Equal(100, result);
+            Assert.Equal(Convert.ToDecimal(expected), result);
         }
 
-        [Fact]
-        public void Meters()
+
+
+        [Theory]
+        [InlineData(1000, LengthUnit.Millimeters, 1)]
+        [InlineData(100, LengthUnit.Centimeters, 1)]
+        [InlineData(1, LengthUnit.Meters, 1)]
+        [InlineData(.001, LengthUnit.Kilometers, 1)]
+        [InlineData(1, LengthUnit.Inches, 0.0254)]
+        [InlineData(1, LengthUnit.Feet, 0.3048)]
+        [InlineData(1, LengthUnit.Yards, 0.9144)]
+        [InlineData(1, LengthUnit.Miles, 1609.344)]
+        public void Meters(double value, LengthUnit units, double expected)
         {
             // arrange
-            var length = Length.FromMeters(1);
+            var length = new Length(Convert.ToDecimal(value), units);
 
             // act
             var result = length.Meters;
 
             // assert
-            Assert.Equal(1, result);
+            Assert.Equal(Convert.ToDecimal(expected), result);
         }
 
-        [Fact]
-        public void Kilometers()
+        [Theory]
+        [InlineData(1000000, LengthUnit.Millimeters, 1)]
+        [InlineData(100000, LengthUnit.Centimeters, 1)]
+        [InlineData(1000, LengthUnit.Meters, 1)]
+        [InlineData(1, LengthUnit.Kilometers, 1)]
+        [InlineData(1, LengthUnit.Inches, 0.0000254)]
+        [InlineData(1, LengthUnit.Feet, 0.0003048)]
+        [InlineData(1, LengthUnit.Yards, 0.0009144)]
+        [InlineData(1, LengthUnit.Miles, 1.609344)]
+        public void Kilometers(double value, LengthUnit units, double expected)
         {
             // arrange
-            var length = Length.FromMeters(1000);
+            var length = new Length(Convert.ToDecimal(value), units);
 
             // act
             var result = length.Kilometers;
 
             // assert
-            Assert.Equal(1, result);
+            Assert.Equal(Convert.ToDecimal(expected), result);
         }
 
         [Fact]
@@ -643,7 +708,6 @@ namespace jaytwo.WeightsAndMeasures.Tests
             // assert
             Assert.Equal(0m, Length.Zero.Meters);
         }
-
 
         [Fact]
         public void MultiplyBy()
