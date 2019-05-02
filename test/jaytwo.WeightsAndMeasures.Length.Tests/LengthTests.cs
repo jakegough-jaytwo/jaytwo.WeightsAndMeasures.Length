@@ -737,32 +737,46 @@ namespace jaytwo.WeightsAndMeasures.Tests
             Assert.Equal(1.1m, length.DivideBy(2L).Meters);
         }
 
-        [Fact]
-        public void Add()
+        [Theory]
+        [InlineData(1, LengthUnit.Meters, 1, LengthUnit.Meters, 2, LengthUnit.Meters)]
+        [InlineData(1, LengthUnit.Meters, 100, LengthUnit.Centimeters, 2, LengthUnit.Meters)]
+        [InlineData(1, LengthUnit.Feet, 12, LengthUnit.Inches, 2, LengthUnit.Feet)]
+        [InlineData(12, LengthUnit.Inches, 1, LengthUnit.Feet, 24, LengthUnit.Inches)]
+        [InlineData(1, LengthUnit.Feet, 30.48, LengthUnit.Centimeters, 2, LengthUnit.Feet)]
+        [InlineData(30.48, LengthUnit.Centimeters, 1, LengthUnit.Feet, 60.96, LengthUnit.Centimeters)]
+        public void Add(double leftValue, LengthUnit leftUnits, double rightValue, LengthUnit rightUnits, double expectedValue, LengthUnit expectedUnits)
         {
             // arrange
-            var length = Length.FromMeters(2.2);
-            var lengthToAdd = Length.FromMeters(1.1);
+            var left = new Length(Convert.ToDecimal(leftValue), leftUnits);
+            var right = new Length(Convert.ToDecimal(rightValue), rightUnits);
+            var expected = new Length(Convert.ToDecimal(expectedValue), expectedUnits);
 
             // act
-            var result = length.Add(lengthToAdd);
+            var result = left.Add(right);
 
             // assert
-            Assert.Equal(3.3m, result.Meters);
+            Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void Subtract()
+        [Theory]
+        [InlineData(2, LengthUnit.Meters, 1, LengthUnit.Meters, 1, LengthUnit.Meters)]
+        [InlineData(2, LengthUnit.Meters, 100, LengthUnit.Centimeters, 1, LengthUnit.Meters)]
+        [InlineData(2, LengthUnit.Feet, 12, LengthUnit.Inches, 1, LengthUnit.Feet)]
+        [InlineData(24, LengthUnit.Inches, 1, LengthUnit.Feet, 12, LengthUnit.Inches)]
+        [InlineData(2, LengthUnit.Feet, 30.48, LengthUnit.Centimeters, 1, LengthUnit.Feet)]
+        [InlineData(60.96, LengthUnit.Centimeters, 1, LengthUnit.Feet, 30.48, LengthUnit.Centimeters)]
+        public void Subtract(double leftValue, LengthUnit leftUnits, double rightValue, LengthUnit rightUnits, double expectedValue, LengthUnit expectedUnits)
         {
             // arrange
-            var length = Length.FromMeters(3.3);
-            var lengthToSubtract = Length.FromMeters(1.1);
+            var left = new Length(Convert.ToDecimal(leftValue), leftUnits);
+            var right = new Length(Convert.ToDecimal(rightValue), rightUnits);
+            var expected = new Length(Convert.ToDecimal(expectedValue), expectedUnits);
 
             // act
-            var result = length.Subtract(lengthToSubtract);
+            var result = left.Subtract(right);
 
             // assert
-            Assert.Equal(2.2m, result.Meters);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
