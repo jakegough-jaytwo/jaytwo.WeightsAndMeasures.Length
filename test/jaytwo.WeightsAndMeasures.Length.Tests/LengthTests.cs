@@ -764,5 +764,20 @@ namespace jaytwo.WeightsAndMeasures.Tests
             // assert
             Assert.Equal(2.2m, result.Meters);
         }
+
+        [Fact]
+        public void ToString_returns_string()
+        {
+            // arrange
+            Assert.Equal("3.3 mm", Length.FromMillimeters(3.3).ToString());
+            Assert.Equal("3.3 cm", Length.FromCentimeters(3.3).ToString());
+            Assert.Equal("3.3 m", Length.FromMeters(3.3).ToString());
+            Assert.Equal("3.3 km", Length.FromKilometers(3.3).ToString());
+            Assert.Equal("3.3 in", Length.FromInches(3.3).ToString());
+            Assert.Equal("3.3 ft", Length.FromFeet(3.3).ToString());
+            Assert.Equal("3.3 yd", Length.FromYards(3.3).ToString());
+            Assert.Equal("3.3 mi", Length.FromMiles(3.3).ToString());
+            Assert.Equal("3.3", new Length(3.3m, LengthUnit.Unknown).ToString());
+        }
     }
 }

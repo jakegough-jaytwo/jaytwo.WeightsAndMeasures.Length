@@ -36,9 +36,9 @@ namespace jaytwo.WeightsAndMeasures
                     return LengthConverter.ToYards(_value, _units) / 1m;
                 case LengthUnit.Miles:
                     return LengthConverter.ToMiles(_value, _units) / 1m;
-                default:
-                    throw new InvalidOperationException($"Cannot convert unit {_units} to {nameof(targetUnits)}");
             }
+
+            throw new InvalidOperationException($"Cannot convert unit {_units} to {targetUnits}");
         }
 
         public bool IsMetric
@@ -237,7 +237,32 @@ namespace jaytwo.WeightsAndMeasures
         public static implicit operator double(Length value) => Convert.ToDouble(value.Meters);
         public static implicit operator long(Length value) => Convert.ToInt64(value.Meters);
         public override int GetHashCode() => Meters.GetHashCode();
-        public override string ToString() => ToString(_units);
-        public string ToString(LengthUnit units) => $"{GetValueAs(units)} {_units}";
+        public override string ToString() => $"{_value / 1m} {GetAbbreviation(_units)}".Trim();
+        public string ToString(LengthUnit units) => $"{GetValueAs(units)} {GetAbbreviation(_units)}";
+
+        internal static string GetAbbreviation(LengthUnit units)
+        {
+            switch (units)
+            {
+                case LengthUnit.Millimeters:
+                    return "mm";
+                case LengthUnit.Centimeters:
+                    return "cm";
+                case LengthUnit.Meters:
+                    return "m";
+                case LengthUnit.Kilometers:
+                    return "km";
+                case LengthUnit.Inches:
+                    return "in";
+                case LengthUnit.Feet:
+                    return "ft";
+                case LengthUnit.Yards:
+                    return "yd";
+                case LengthUnit.Miles:
+                    return "mi";
+            }
+
+            return string.Empty;
+        }
     }
 }
