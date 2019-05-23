@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xunit;
 
 namespace jaytwo.WeightsAndMeasures.Tests
@@ -92,6 +92,7 @@ namespace jaytwo.WeightsAndMeasures.Tests
             // assert
             Assert.Equal(Convert.ToDecimal(expected), result);
         }
+
         [Theory]
         [InlineData(1, LengthUnit.Millimeters, 1)]
         [InlineData(0.1, LengthUnit.Centimeters, 1)]
@@ -133,8 +134,6 @@ namespace jaytwo.WeightsAndMeasures.Tests
             // assert
             Assert.Equal(Convert.ToDecimal(expected), result);
         }
-
-
 
         [Theory]
         [InlineData(1000, LengthUnit.Millimeters, 1)]
@@ -233,7 +232,6 @@ namespace jaytwo.WeightsAndMeasures.Tests
             // assert
             Assert.Equal(Convert.ToDecimal(expectedMeters), length.Meters);
         }
-
 
         [Fact]
         public void FromMeters_overloads()
